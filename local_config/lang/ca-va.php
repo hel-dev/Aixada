@@ -352,7 +352,7 @@ $Text['required_fields'] = " són camps obligatoris";
  */
 $Text['nav_ajuda'] = "Ajuda";
 $Text['nav_home'] = "Inici";
-$Text['nav_wiz'] = "Torn";
+$Text['nav_wiz'] = "Repartiment";
 //  $Text['nav_wiz_arrived'] = "Productes que no han arribat";
 	$Text['nav_wiz_validate'] = "Valida";
 //  $Text['nav_wiz_open'] = "Obre";
