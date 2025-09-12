@@ -52,7 +52,6 @@
 
 <div class="ui-widget-header ui-corner-all" id="menuBgBar">
 <div  id="topMenu">
-<a tabindex="0" href="ajuda.php" 	id="navAjuda" class="menuTop"><?php echo $Text['nav_ajuda'];?></a>
 <a tabindex="1" href="index.php" 	id="navHome" class="menuTop"><?php echo $Text['nav_home'];?></a>
 <a tabindex="2" href="torn.php" 	id="navWizard" class="menuTop"><?php echo $Text['nav_wiz'];?></a>
 <?php if ($cfg_use_shop) {  // USE SHOP: start ?>
