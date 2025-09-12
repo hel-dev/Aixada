@@ -1,4 +1,14 @@
 <?php include "php/inc/header.inc.php" ?>
+<?php
+// Obtenir el nom de la sòcia per a la salutació
+$memberName = '';
+try {
+    $db = DBWrap::get_instance();
+    $rs = $db->Execute('select name from aixada_member where id = :1q', get_session_member_id());
+    if ($row = $rs->fetch_assoc()) { $memberName = $row['name']; }
+    DBWrap::get_instance()->free_next_results();
+} catch (Exception $e) {}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=$language;?>" lang="<?=$language;?>">
 <head>
@@ -574,7 +584,8 @@
 					<p><a href="incidents.php"><?php echo $Text['icon_incidents'];?></a></p>
 				</div>
 			</div>
-			<div id="rightSummaryCol" class="aix-style-layout-splitW80 floatLeft aix-layout-widget-center-col">
+			<div id="rightSummaryCol" class="aix-style-layout-splitW80 floatLeft aix-layout-widget-center-col" style="margin-top:1em;">
+				<h2 style="font-weight: normal; margin:.2em 0 .6em 0; color:#365da0;">Hola, <?=htmlspecialchars($memberName ?: get_session_login())?>!</h2>
 
 				<ul>
 					<li><a href="#tabs-1"><h2><?=$Text['my_orders'];?></h2></a></li>
