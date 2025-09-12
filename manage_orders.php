@@ -1394,14 +1394,25 @@
 					$("#dialog_printOpt").dialog("open");
 				});
 
+				// Initialize Print as dropdown with two actions
 				$("#btn_print").button({
-				 icons: {
-		        		primary: "ui-icon-print"
-		        	}
-				 })
-        		.click(function(e){
-        			printQueue();
-        		});
+					icons: {
+						primary: "ui-icon-print",
+						secondary: "ui-icon-triangle-1-s"
+					}
+				}).menu({
+					content: $('#printMenuItems').html(),
+					showSpeed: 50,
+					flyOut: true,
+					itemSelected: function(item){
+						var action = $(item).attr('id');
+						if (action === 'printNow') {
+							printQueue();
+						} else if (action === 'printOptions') {
+							$("#dialog_printOpt").dialog("open");
+						}
+					}
+				});
 
 
         		//download selected as zip
@@ -1862,11 +1873,13 @@
 					</ul>
 				</div>	
 				<button id="btn_print" class="overviewElements btn_right"><?=$Text['printout'];?></button>
-                <button id="btn_printOpt"
-                    title="<?=$Text['order_printOpt_dialog']?>"
-                    class="overviewElements btn_right"
-                    style="padding:4px 0"><span 
-                        class="ui-button-icon-primary ui-icon ui-icon-gear" ></span></button>
+                <!-- Standalone options button removed; using dropdown on Print -->
+                <div id="printMenuItems" class="hidden">
+                    <ul>
+                        <li><a href="javascript:void(0)" id="printNow"><?=$Text['printout'];?></a></li>
+                        <li><a href="javascript:void(0)" id="printOptions"><?=$Text['order_printOpt_dialog'];?></a></li>
+                    </ul>
+                </div>
                 <div id="dialog_printOpt" title="<?=$Text['order_printOpt_dialog']?>" class="hidden">
                     <table>
                     <tr>
