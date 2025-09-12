@@ -467,7 +467,7 @@
 		}); //end loadCart
 
 		$("#providerSelect").xml2html("reload", {
-			params : 'oper=get'+what+'Providers&date='+dateText,
+			params : (what === 'Shop' ? 'oper=getStockProviders' : 'oper=get'+what+'Providers&date='+dateText),
 			rowComplete : function(rowIndex, row){
 				//read here if provider's order is still open or not.
 
