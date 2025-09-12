@@ -1906,7 +1906,7 @@
                     </tr>
                     </table>
                 </div>
-		   		<button id="btn_zip" class="overviewElements btn_right">Zip</button>			
+		   		<!-- Zip button removed -->
 		   	</div> 	
 		</div> <!--  end of title wrap -->
 		<div class="ui-widget overviewElements" id="withSelected">
@@ -1962,7 +1962,7 @@
 							<select id="bulkActionsBottom">
 								<option value="-1"><?=$Text['with_sel'];?></option>
 								<option value="print"><?=$Text['printout'];?></option>
-								<option value="download"><?=$Text['dwn_zip'];?></option>
+								<!-- Zip option removed -->
 							</select>
 							</p>
 						</td>
