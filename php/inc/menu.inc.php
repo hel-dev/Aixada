@@ -55,7 +55,7 @@
 <a tabindex="1" href="index.php" 	id="navHome" class="menuTop"><?php echo $Text['nav_home'];?></a>
 <a tabindex="2" href="manage_orders.php?filter=steps&steps=1&range=week" 	id="navWizard" class="menuTop"><?php echo $Text['nav_wiz'];?></a>
 <?php if ($cfg_use_shop) {  // USE SHOP: start ?>
-<a tabindex="3" href="shop_and_order.php?what=Shop" 	id="navShop" class="menuTop"><?php echo $Text['nav_shop'];?></a>
+<a tabindex="3" href="shop_and_orderstock.php?what=Shop" 	id="navShop" class="menuTop"><?php echo $Text['nav_shop'];?></a>
 <?php } // - - - - - - - - - - USE SHOP: end ?>
 <a tabindex="4" href="shop_and_order.php?what=Order" 		id="navOrder" class="menuTop"><?php echo $Text['nav_order'];?></a>
 <a tabindex="5" href="#" 			id="navManage" class="menuTop"><?php echo $Text['nav_mng'];?></a>

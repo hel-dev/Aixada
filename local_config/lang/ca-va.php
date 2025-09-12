@@ -359,7 +359,7 @@ $Text['nav_wiz'] = "Repartiment";
 //  $Text['nav_wiz_close'] = "Tanca";
   $Text['nav_wiz_torn'] = "Resum torn";
 	$Text['nav_wiz_cashbox'] = "Caixa";
-$Text['nav_shop'] = "Compra avui";
+$Text['nav_shop'] = "Estoc";
 $Text['nav_order'] = "Propera comanda";
 $Text['nav_mng'] = "Gestiona";
 	//$Text['nav_mng_uf'] = "Unitats familiars";
@@ -967,7 +967,7 @@ $Text['btn_del'] = "Esborrar";
 
 $Text['btn_new_provider'] = "Nou proveïdor";
 $Text['btn_new_product'] = "Afegir producte";
-$Text['orderable'] = "Comanda directe"; //product type
+$Text['orderable'] = "Comanda directa"; //product type
 $Text['order_notes'] = "(comentaris comanda)"; //order comments
 $Text['msg_err_providershort'] = "El nom del proveïdor no pot quedar buit i ha de ser de més de 2 caràcters.";
 $Text['msg_err_productshort']  = "El nom del producte no pot quedar buit i ha de ser de més de 2 caràcters.";
