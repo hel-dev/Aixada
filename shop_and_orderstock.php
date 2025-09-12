@@ -619,7 +619,6 @@
 		    					echo $Text['ti_order'];
 		    				} else if ($_REQUEST['what'] == 'Shop') {
 		    					echo $Text['ti_shop'];
-		    					printf('<title="%s">(en acabar, valida!!)',$Text['show_date_field']);
 		    				}?>
 		    	&nbsp; <input  type="text" class="datePickerInput ui-widget-content ui-corner-all" id="datepicker" title="Click to edit"></h1>
 		    	<ul id="dateList" class="ol_selectable"></ul>
