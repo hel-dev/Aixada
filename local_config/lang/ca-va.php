@@ -90,7 +90,7 @@ $Text['ti_mng_activate_preorders'] = "Converteix una comanda acumulativa en coma
 $Text['ti_mng_members'] = "Gestiona els membres";
 $Text['ti_mng_db'] = "Còpia de seguretat de la base de dades";
 $Text['ti_order'] = "Fes la comanda per a ";
-$Text['ti_shop'] = "Compra articles ";
+$Text['ti_shop'] = "Compra productes de l'estoc";
 //$Text['ti_report_report'] = "Resum de comandes per a ";
 $Text['ti_report_account'] = "Informe de tots els comptes";
 //$Text['ti_report_my_account'] = "Informe del meu compte ";
@@ -144,7 +144,7 @@ $mesos=[1=>"Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost
 /**
  * 				roles
  */
-$Text['Consumer'] = 'Consumidor';
+$Text['Consumer'] = 'Consumidora';
 $Text['Checkout'] = 'Caixa';
 $Text['Consumer Commission'] = 'Comissió de consum';
 $Text['Econo-Legal Commission'] = 'Comissió econo-legal';
@@ -352,15 +352,15 @@ $Text['required_fields'] = " són camps obligatoris";
  */
 $Text['nav_ajuda'] = "Ajuda";
 $Text['nav_home'] = "Inici";
-$Text['nav_wiz'] = "Torn";
+$Text['nav_wiz'] = "Repartiment";
 //  $Text['nav_wiz_arrived'] = "Productes que no han arribat";
 	$Text['nav_wiz_validate'] = "Valida";
 //  $Text['nav_wiz_open'] = "Obre";
 //  $Text['nav_wiz_close'] = "Tanca";
   $Text['nav_wiz_torn'] = "Resum torn";
 	$Text['nav_wiz_cashbox'] = "Caixa";
-$Text['nav_shop'] = "Compra avui";
-$Text['nav_order'] = "Propera comanda";
+$Text['nav_shop'] = "Estoc";
+$Text['nav_order'] = "Fes comanda";
 $Text['nav_mng'] = "Gestiona";
 	//$Text['nav_mng_uf'] = "Unitats familiars";
 	$Text['nav_mng_member'] = "Membres";
@@ -576,6 +576,7 @@ $Text['description_url'] = "URL de descripció";
  * afegits després 14.5
  */
 $Text['msg_err_validate_self'] = 'No pots validar-te a tu mateix';
+$Text['msg_cart_validated'] = 'Carret validat correctament!';
 $Text['msg_err_preorder'] = 'La comanda acumulativa ha de ser amb data futura!';
 $Text['msg_preorder_success'] = "La comanda acumulativa s'ha activat correctament per a la data:";
 //$Text['msg_can_be_ordered'] =  'Es pot fer comanda en aquesta data';
@@ -967,7 +968,7 @@ $Text['btn_del'] = "Esborrar";
 
 $Text['btn_new_provider'] = "Nou proveïdor";
 $Text['btn_new_product'] = "Afegir producte";
-$Text['orderable'] = "Comanda directe"; //product type
+$Text['orderable'] = "Comanda directa"; //product type
 $Text['order_notes'] = "(comentaris comanda)"; //order comments
 $Text['msg_err_providershort'] = "El nom del proveïdor no pot quedar buit i ha de ser de més de 2 caràcters.";
 $Text['msg_err_productshort']  = "El nom del producte no pot quedar buit i ha de ser de més de 2 caràcters.";

@@ -52,11 +52,10 @@
 
 <div class="ui-widget-header ui-corner-all" id="menuBgBar">
 <div  id="topMenu">
-<a tabindex="0" href="ajuda.php" 	id="navAjuda" class="menuTop"><?php echo $Text['nav_ajuda'];?></a>
 <a tabindex="1" href="index.php" 	id="navHome" class="menuTop"><?php echo $Text['nav_home'];?></a>
-<a tabindex="2" href="torn.php" 	id="navWizard" class="menuTop"><?php echo $Text['nav_wiz'];?></a>
+<a tabindex="2" href="manage_orders.php?filter=steps&steps=1&range=week" 	id="navWizard" class="menuTop"><?php echo $Text['nav_wiz'];?></a>
 <?php if ($cfg_use_shop) {  // USE SHOP: start ?>
-<a tabindex="3" href="shop_and_order.php?what=Shop" 	id="navShop" class="menuTop"><?php echo $Text['nav_shop'];?></a>
+<a tabindex="3" href="shop_and_orderstock.php?what=Shop" 	id="navShop" class="menuTop"><?php echo $Text['nav_shop'];?></a>
 <?php } // - - - - - - - - - - USE SHOP: end ?>
 <a tabindex="4" href="shop_and_order.php?what=Order" 		id="navOrder" class="menuTop"><?php echo $Text['nav_order'];?></a>
 <a tabindex="5" href="#" 			id="navManage" class="menuTop"><?php echo $Text['nav_mng'];?></a>
@@ -69,6 +68,9 @@
 
 <div id="navManageItems" class="hidden">
 	<ul>
+		<?php if (get_current_role() == 'Consumer') { ?>
+		<li><a href="manage_orderable_products.php">Gestiona comandes</a></li>
+		<?php } else { ?>
 		<li><a href="manage_ufmember.php"><?php echo $Text['uf_short'];?> & <?php echo $Text['nav_mng_member'];?></a>
 			<ul>
 			<li>
@@ -116,6 +118,7 @@
 					</ul></li>
 			</ul>
 		</li>
+		<?php } ?>
 
 
 	</ul>
