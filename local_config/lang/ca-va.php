@@ -576,6 +576,7 @@ $Text['description_url'] = "URL de descripció";
  * afegits després 14.5
  */
 $Text['msg_err_validate_self'] = 'No pots validar-te a tu mateix';
+$Text['msg_cart_validated'] = 'Carret validat correctament!';
 $Text['msg_err_preorder'] = 'La comanda acumulativa ha de ser amb data futura!';
 $Text['msg_preorder_success'] = "La comanda acumulativa s'ha activat correctament per a la data:";
 //$Text['msg_can_be_ordered'] =  'Es pot fer comanda en aquesta data';

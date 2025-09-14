@@ -41,12 +41,17 @@
 
 
 	<script type="text/javascript">
-
+	var session_uf_id = <?=get_session_uf_id();?>;
 	$(function(){
 		$.ajaxSetup({ cache: false });
 
 	//decide what to do in which section
 	var what = $.getUrlVar('what');
+	// Netegem el fragment de l'URL (#tabs-1, etc.)
+	if (what && what.indexOf('#') !== -1) {
+		what = what.split('#')[0];
+	}
+	console.log('what value:', what);
 
 	//allow pruchase of stock_actual < 0 items? 
 	var preventOutofStock = <?php echo configuration_vars::get_instance()->prevent_out_of_stock_purchase;?>
@@ -77,14 +82,90 @@
     };
 
 	//init cart
+	var loadCartURL = 'php/ctrl/ShopAndOrder.php?oper=get'+what+'Cart';
+	console.log('loadCartURL:', loadCartURL);
 	$('#cartLayer').aixadacart("init",{
 		saveCartURL : 'php/ctrl/ShopAndOrder.php?what='+what+'&oper=commit',
-		loadCartURL : 'php/ctrl/ShopAndOrder.php?oper=get'+what+'Cart',
+		loadCartURL : loadCartURL,
+		loadCartHeadURL : (what=='Shop') ? 'php/ctrl/Validate.php?oper=getShopCartHead' : 'php/ctrl/ShopAndOrder.php?oper=get'+what+'CartHead',
 		cartType	: (what=='Shop')? 'standalone':'standalone_preorder',
-		btnType		: (what=='Shop')? 'validate' : 'save',
-		autoSave	: 5000,
+		btnType		: 'save',
+		autoSave	: (what=='Shop') ? false : 5000,
+		saveOnDelete: true,
 		loadSuccess : updateCartLabel,
 		submitComplete : updateCartLabel,
+		submitSuccess : function (msg){
+			if (what === 'Shop' && shouldValidate) {
+				// Fem la validació automàticament
+				var cart_id = msg.cart_id || $('#global_cart_id').val();
+				
+				$.ajax({
+					type: "POST",
+					url: "php/ctrl/Validate.php?oper=commit&uf_id=" + session_uf_id + "&cart_id=" + cart_id,
+					data: $('#cartLayer form').serialize(),
+					success: function(validateMsg) {
+						// Mostra missatge d'èxit
+						$.showMsg({
+							msg: "<?=$Text['msg_cart_validated'];?>",
+							type: 'success',
+							buttons: [{
+								text: "OK",
+								click: function() {
+									$(this).dialog("close");
+									// Refresca la pàgina quan es clica OK
+									window.location.reload();
+								}
+							}]
+						});
+						// Buida el carret
+						$('#cartLayer').aixadacart("resetCart");
+						// Actualitza l'etiqueta
+						updateCartLabel();
+						// Reseteja la variable
+						shouldValidate = false;
+						
+						// Neteja els camps de quantitat
+						$('.product_list input[type="text"]').val('0.00');
+						
+						// Renova el carret per crear un nou ID
+						if (what === 'Shop') {
+							// Per a l'estoc, usem la data d'avui
+							$.getAixadaDates('getToday', function (date){
+								$('#cartLayer').aixadacart('loadCart', {
+									loadCartURL: 'php/ctrl/ShopAndOrder.php?oper=get'+what+'Cart&date='+date[0],
+									date: date[0]
+								});
+							});
+						} else {
+							// Per a altres tipus, usem la data seleccionada
+							var dateText = getSelectedDate(what);
+							$('#cartLayer').aixadacart('loadCart', {
+								loadCartURL: 'php/ctrl/ShopAndOrder.php?oper=get'+what+'Cart&date='+dateText,
+								date: dateText
+							});
+						}
+					},
+					error: function(xhr, status, error) {
+						$.showMsg({
+							msg: "Error al validar: " + error,
+							type: 'error'
+						});
+						// Reseteja la variable
+						shouldValidate = false;
+					}
+				});
+			} else {
+				// Només actualitzem l'etiqueta
+				updateCartLabel();
+				// Assegura que el botó sempre digui "Validar" per a stock
+				// Utilitzem setTimeout per fer-ho després que el plugin canviï el text
+				if (what === 'Shop') {
+					setTimeout(function() {
+						$('#btn_submit').button('option', 'label', 'Validar');
+					}, 10);
+				}
+			}
+		},
 		submitError : function (err_msg){
 
 			//foreign key exception; could be that orderable products have been changed while ordering and
@@ -123,6 +204,37 @@
 		}
 	});
 
+	// Configurem la data per a l'estoc (igual que a validatestock.php)
+	if (what === 'Shop') {
+		// Variable per controlar quan volem fer validació
+		var shouldValidate = false;
+		
+		// Per a l'estoc, usem la data d'avui
+		$.getAixadaDates('getToday', function (date){
+			$('#cartLayer').aixadacart('options', {
+				date: date[0]
+			});
+		});
+		
+		// Canviem el text del botó per a l'estoc
+		$('#btn_submit').button('option', 'label', 'Validar');
+		
+		// Event handler específic per al botó "Validar"
+		$(document).on('click', '#btn_submit', function(e) {
+			console.log('Botó Validar clicat, what:', what);
+			if (what === 'Shop') {
+				e.preventDefault();
+				e.stopPropagation();
+				console.log('Iniciant validació...');
+				
+				// Marquem que volem fer validació
+				shouldValidate = true;
+				
+				// Primer desem el carret
+				$('#cartLayer').aixadacart("saveCart");
+			}
+		});
+	}
 
 	$('#product_list_provider tbody').xml2html("init");
 	$('#product_list_category tbody').xml2html("init");
