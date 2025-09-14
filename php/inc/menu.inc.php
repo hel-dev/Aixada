@@ -68,6 +68,9 @@
 
 <div id="navManageItems" class="hidden">
 	<ul>
+		<?php if (get_current_role() == 'Consumer') { ?>
+		<li><a href="manage_orderable_products.php">Gestiona comandes</a></li>
+		<?php } else { ?>
 		<li><a href="manage_ufmember.php"><?php echo $Text['uf_short'];?> & <?php echo $Text['nav_mng_member'];?></a>
 			<ul>
 			<li>
@@ -115,6 +118,7 @@
 					</ul></li>
 			</ul>
 		</li>
+		<?php } ?>
 
 
 	</ul>
