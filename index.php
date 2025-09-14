@@ -568,24 +568,8 @@ try {
 	<div id="stagewrap" class="ui-widget <?= negative_balances_stagewrap_class(); ?>">
 	
 		<div id="homeWrap">
-			<div class="aix-layout-fixW150 floatLeft">
-				<?php if ($cfg_use_shop) {  // USE SHOP: start  ?>
-				<div class="homeIcon index_navShop">
-					<a href="shop_and_order.php?what=Shop"><img src="img/cesta.png"/></a>
-					<p><a href="shop_and_order.php?what=Shop"><?php echo $Text['icon_purchase'];?></a></p>
-				</div>
-				<?php } // - - - - - - - - - - USE SHOP: end ?>
-				<div class="homeIcon index_navOrder">
-					<a href="shop_and_order.php?what=Order"><img src="img/pedido.png"/></a>
-					<p><a href="shop_and_order.php?what=Order"><?php echo $Text['icon_order'];?></a></p>
-				</div>
-				<div class="homeIcon index_navIncidents">
-					<a href="incidents.php"><img src="img/incidencias.png"/></a>
-					<p><a href="incidents.php"><?php echo $Text['icon_incidents'];?></a></p>
-				</div>
-			</div>
-			<div id="rightSummaryCol" class="aix-style-layout-splitW80 floatLeft aix-layout-widget-center-col" style="margin-top:1em;">
-				<h2 style="font-weight: normal; margin:.2em 0 .6em 0; color:#365da0;">Hola, <?=htmlspecialchars($memberName ?: get_session_login())?>!</h2>
+			<div id="rightSummaryCol" class="aix-style-layout-splitW80" style="margin:1em auto; text-align:center; max-width:1200px;">
+				<h2 style="font-weight: normal; margin:.2em 0 .6em 0; color:#365da0; text-align:left;">Hola, <?=htmlspecialchars($memberName ?: get_session_login())?>!</h2>
 
 				<ul>
 					<li><a href="#tabs-1"><h2><?=$Text['my_orders'];?></h2></a></li>
