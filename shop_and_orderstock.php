@@ -81,7 +81,7 @@
 		saveCartURL : 'php/ctrl/ShopAndOrder.php?what='+what+'&oper=commit',
 		loadCartURL : 'php/ctrl/ShopAndOrder.php?oper=get'+what+'Cart',
 		cartType	: (what=='Shop')? 'standalone':'standalone_preorder',
-		btnType		: 'save',
+		btnType		: (what=='Shop')? 'validate' : 'save',
 		autoSave	: 5000,
 		loadSuccess : updateCartLabel,
 		submitComplete : updateCartLabel,
@@ -564,32 +564,7 @@
 
        
 
-			/**
-			 *	returns to order overview 
-			 */
-			var label = 'Overview';
 			
-				label = 'Anar a validar estoc';
-			
-			$("#btn_overview").button({
-				icons: {
-		        		primary: "ui-icon-disk"
-		        	},
-        		label: label
-				 })
-	    		.click(function(e){
-						window.location.href = 'validatestock.php';	
-	    		});
-			
-			/**
-             * Distribute and validate
-             */
-            $("#btn_disValidate").button({
-                icons: { primary: "ui-icon-disk" },
-				label: label
-            	}).click(function(e) {
-                	window.location.href = 'validatestock.php';
-        	});
 
 
 
@@ -627,7 +602,6 @@
     		</div>
 
 	        <div id="titleRightCol">
-	        	<button id="btn_overview" class="floatRight detailElements"><?php echo $Text['overview'];?></button>
 				
 			</div>
 		</div><!-- end titlewrap -->
@@ -771,8 +745,7 @@
 
 		<!-- Shopping cart starts -->
 		<div id="rightCol" class="aix-layout-splitW40 floatLeft aix-layout-widget-right-col">
-			<div id="cartLayer"></div>		
-			<button id="btn_disValidate" class="floatRight detailElements"><?php echo $Text['overview'];?></button>				
+			<div id="cartLayer"></div>				
 		</div>
 			 
 
