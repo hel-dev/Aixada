@@ -144,7 +144,7 @@ $mesos=[1=>"Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost
 /**
  * 				roles
  */
-$Text['Consumer'] = 'Consumidor';
+$Text['Consumer'] = 'Consumidora';
 $Text['Checkout'] = 'Caixa';
 $Text['Consumer Commission'] = 'Comissió de consum';
 $Text['Econo-Legal Commission'] = 'Comissió econo-legal';
