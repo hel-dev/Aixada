@@ -568,7 +568,7 @@ try {
 	<div id="stagewrap" class="ui-widget <?= negative_balances_stagewrap_class(); ?>">
 	
 		<div id="homeWrap">
-			<div id="rightSummaryCol" class="aix-style-layout-splitW80" style="margin:1em auto; text-align:center; max-width:1200px;">
+			<div id="rightSummaryCol" class="aix-style-layout-splitW80" style="margin:3em auto 1em auto; text-align:center; max-width:1200px;">
 				<h2 style="font-weight: normal; margin:.2em 0 .6em 0; color:#365da0; text-align:left;">Hola, <?=htmlspecialchars($memberName ?: get_session_login())?>!</h2>
 
 				<ul>
