@@ -520,25 +520,14 @@
 
 					});
 
+					// Show or hide warning message based on review status
 					if (allRevised){
-						$('#dialog_setShopDate').dialog("open");
+						$('#warningMessage').hide();
 					} else {
-
-						$.showMsg({
-							msg:"<?=$Text['msg_err_unrevised']?>",
-							buttons: {
-								"<?=$Text['btn_dis_anyway'];?>":function(){						
-									$('#dialog_setShopDate').dialog("open");
-									$(this).dialog("close");
-								},
-								"<?=$Text['btn_remaining'];?>" : function(){
-									$( this ).dialog( "close" );
-								}
-							},
-							title: local_lang._confirm,
-							type: 'confirm'});
-
+						$('#warningText').text("<?php echo addslashes($Text['msg_pending_items']); ?>");
+						$('#warningMessage').show();
 					}
+					$('#dialog_setShopDate').dialog("open");
        			}).hide();
 
 			$('#dialog_setShopDate').dialog({
@@ -550,35 +539,33 @@
 						var $this = $(this);
 						$.ajax({
 							type: "POST",
-							url: 'php/ctrl/Orders.php?oper=moveOrderToShop&order_id='+gSelRow.attr('orderId')+'&date='+$.getSelectedDate('#datepicker'),
+							url: 'php/ctrl/Orders.php?oper=directlyValidateOrder&order_id='+gSelRow.attr('orderId')+
+								'&record_provider_invoice='+local_cfg.record_provider_invoice,
 							success: function(txt){
-								$('.ui-dialog-buttonpane button', $this.parent()).hide();
-								$('#showDatePicker').hide();
-								$('.success_msg').show().next().hide();
-								$this.button('disable');
-								setTimeout(function(){
-									$('.ui-dialog-buttonpane button', $this.parent()).show();
-									$('#showDatePicker').show();
-									$this.dialog( "close" )
-									$('.interactiveCell').hide();
-									$('.success_msg').hide().next().show();
-									//reload order list
-									$('#tbl_orderOverview tbody').xml2html('reload');
-									switchTo('overview');
-								},2000);
+								$this.dialog("close");
+								//reload order list
+								$('#tbl_orderOverview tbody').xml2html('reload');
+								switchTo('overview');
+								$.showMsg({
+									msg: txt,
+									autoclose: 3000,
+									buttons: {},
+									title: "<?php echo $Text['msg_success']; ?>",
+									type: 'success'
+								});
 							},
 							error : function(XMLHttpRequest, textStatus, errorThrown){
+								switchTo('overview');
+								$this.dialog("close");
 								$.showMsg({
-									msg:XMLHttpRequest.responseText,
+									msg: "<?=i18n('msg_err_disValitate');?>"+ gSelRow.attr('orderId') +
+										"<hr><br>" + XMLHttpRequest.responseText,
 									type: 'error'});
-								
 							}
 						});
-	
-						
 						},
 				
-					"<?=$Text['btn_close'];?>"	: function(){
+					"<?=$Text['btn_continue_reviewing'];?>"	: function(){
 						$( this ).dialog( "close" );
 						} 
 				}
@@ -2240,8 +2227,20 @@
 
 <div id="dialog_setShopDate" title="<?php echo $Text['tit_set_shpDate']; ?>">
 	<p>&nbsp;</p>
-	<p class="success_msg aix-style-ok-green ui-corner-all aix-style-padding8x8"><?php echo $Text['msg_move_to_shop']; ?></p>
-	<p><?php echo $Text['msg_confirm_move']; ?></p>
+	<p id="warningMessage" style="background-color: #fff3cd; padding: 10px; border-radius: 5px; margin: 10px 0;">
+		<span style="color: #0c5460; font-weight: bold;">ℹ</span> <span id="warningText"><?php echo $Text['msg_confirm_move']; ?></span>
+	</p>
+	<hr style="margin: 15px 0;">
+	<div style="background-color: #f8d7da; padding: 15px; border-radius: 5px; margin: 10px 0;">
+		<p style="color: #721c24; font-weight: bold; margin: 0 0 10px 0;"><?php echo $Text['msg_attention_warning']; ?></p>
+		<ul style="color: #721c24; margin: 10px 0; padding-left: 20px;">
+			<li><?php echo $Text['msg_no_delivery_note']; ?></li>
+			<li><?php echo $Text['msg_wrong_delivery_note']; ?></li>
+		</ul>
+	</div>
+	<div style="background-color: #d1ecf1; padding: 15px; border-radius: 5px; margin: 10px 0; border-left: 4px solid #721c24;">
+		<p style="color: #721c24; font-weight: bold; margin: 0; font-size: 16px; text-align: center;"><?php echo $Text['msg_irreversible']; ?></p>
+	</div>
 	<br/>
 	<p class="textAlignCenter boldStuff" id="indicateShopDate"></p> 
 	<br/>
