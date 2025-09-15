@@ -1757,14 +1757,15 @@
                             });
                             $('#btn_addToOrder').show();
 
-							$('#dialog_orderStatus button').button('enable');
-							$('#btn_'+gRevStatus[sindex]).button('disable');
-							$('#currentOrderStatus')
-								.html(gRevStatusI18n[sindex])
-								.removeClass()
-								.addClass("ui-corner-all aix-style-padding3x3 "+
-									gRevStatusClass[sindex]);
-							$('#dialog_orderStatus').dialog("open");
+							// Dialog removed - no longer show order status popup
+							// $('#dialog_orderStatus button').button('enable');
+							// $('#btn_'+gRevStatus[sindex]).button('disable');
+							// $('#currentOrderStatus')
+							// 	.html(gRevStatusI18n[sindex])
+							// 	.removeClass()
+							// 	.addClass("ui-corner-all aix-style-padding3x3 "+
+							// 		gRevStatusClass[sindex]);
+							// $('#dialog_orderStatus').dialog("open");
 							$('.orderTotals').hide();
 							$('#tbl_reviseOrder').hide();
 							$('#tbl_reviseOrder tbody').xml2html("reload", {						//load order details for revision
