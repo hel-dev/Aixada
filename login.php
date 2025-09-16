@@ -48,7 +48,7 @@ if (!isset($_SESSION)) {
 				//alert(dataSerial);
 				$.ajax({
 					type: "POST",
-                    url: "php/ctrl/Login.php?oper=login",
+                    url: "<?php echo (strpos($_SERVER['HTTP_HOST'], 'pangea.org') !== false) ? './php/ctrl/Login.php?oper=login' : 'php/ctrl/Login.php?oper=login'; ?>",
 					data:dataSerial,		
 					success: function() {
 					    top.location.href = 'index.php';
